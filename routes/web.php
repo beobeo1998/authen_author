@@ -18,7 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home',[LoginController::class,'index']);
+Route::get('/home',[LoginController::class,'index'])->middleware('auth')->name('home');
 
-Route::get('/login',[LoginController::class,'getLogin'])->name('get.login');
-Route::post('/login',[LoginController::class,'postLogin'])->name('post.login');
+Route::get('/login',[LoginController::class,'getLogin'])->name('get.login')
+        ->middleware('guest');
+Route::post('/login',[LoginController::class,'postLogin'])->name('post.login')
+        ->middleware('guest');
+
+Route::get('logout',[LoginController::class,'logout'])->name('logout')->middleware('auth');

@@ -20,18 +20,24 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-
+            <li class="nav-item ">
+                <a class="nav-link" href="/">/ <span class="sr-only">(current)</span></a>
+              </li>
             <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
+            @if (Auth::check())
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('logout') }}">Logout</a>
+                </li>
+            @else
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ route('get.login') }}">Login</a>
+                </li>
+            @endif
 
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ route('get.login') }}">Login</a>
-            </li>
 
-            <li class="nav-item ">
-                <a class="nav-link" href="">Logout</a>
-            </li>
+
 
           </ul>
           <form class="form-inline my-2 my-lg-0">
