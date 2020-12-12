@@ -26,6 +26,9 @@
             <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
               <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('get.register') }}">Register</a>
+            </li>
             @if (Auth::check())
                 <li class="nav-item ">
                     <a class="nav-link" href="{{ route('logout') }}">Logout</a>

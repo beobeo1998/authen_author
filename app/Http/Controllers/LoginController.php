@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller
 {
@@ -28,5 +32,16 @@ class LoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function getRegister(){
+        return view('pages.register');
+    }
+
+    public function postRegister(RegisterRequest $request){
+        $data = $request->except('_token','password');
+        $data['password']   = Hash::make($request->password);
+        User::insert($data);
+        return redirect()->route('get.login');
     }
 }
